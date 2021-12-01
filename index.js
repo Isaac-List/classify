@@ -5,14 +5,14 @@
  */
 
 // import request from "requests";
-const https = require('https');
+const request = require('request');
 const xml2js = require('xml2js').parseString;
 
 const ENDPOINT = "http://classify.oclc.org/classify2/Classify?summary=true&isbn=";
 const sec_ep = "http://classify.oclc.org/classify2/Classify?summary=true&owi=";
 
 function getRequest(identifier, endpoint, callback) {
-  https.request({
+  request({
     url: endpoint + identifier,
     json: true,
     headers: {
@@ -38,7 +38,7 @@ function getRequest(identifier, endpoint, callback) {
         try {
           response.status = result.response[0]['$'].code,
           response.owi = result.work[0]["$"].owi
-          response.author = revarsult.work[0]["$"].author;
+          response.author = result.work[0]["$"].author;
           response.title = result.work[0]["$"].title;
           response.dewey = result.recommendations[0].ddc[0].mostPopular[0]['$'].sfa,
           response.congress = result.recommendations[0].lcc[0].mostPopular[0]['$'].sfa
@@ -52,14 +52,14 @@ function getRequest(identifier, endpoint, callback) {
   )
 }
 
-// export function classify(identifier) {
-//   let response = getRequest(identifier, ENDPOINT, function (data) {
-//     return data;
-//   });
+export function classify(identifier) {
+  let response = getRequest(identifier, ENDPOINT, function (data) {
+    return data;
+  });
 
-//   console.log("Response: ", response);
-//   return response;
-// }
+  console.log("Response: ", response);
+  return response;
+}
 
 // Module Test Code
 getRequest("0380807343", ENDPOINT, function (data) {
