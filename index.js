@@ -52,7 +52,7 @@ function getRequest(identifier, endpoint, callback) {
   )
 }
 
-export function classify(identifier) {
+exports.classify = function (identifier) {
   let response = getRequest(identifier, ENDPOINT, function (data) {
     return data;
   });
@@ -62,6 +62,6 @@ export function classify(identifier) {
 }
 
 // Module Test Code
-getRequest("0380807343", ENDPOINT, function (data) {
-  console.log(data);
-});
+// getRequest("0380807343", ENDPOINT, function (data) {
+  // console.log(data);
+// });
