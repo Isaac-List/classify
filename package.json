@@ -1,5 +1,5 @@
 {
-  "name": "classify",
+  "name": "classify2_api",
   "version": "0.1.0",
   "description": "Use OCLC's Classify2 API",
   "engines": {
