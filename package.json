@@ -18,5 +18,6 @@
     "should": "~1.3.0"
   },
   "author": "Isaac List",
-  "license": "MPL-2.0"
+  "license": "MPL-2.0",
+  "repository": "isaac-list/classify"
 }
