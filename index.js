@@ -52,16 +52,19 @@ function getRequest(identifier, endpoint, callback) {
   )
 }
 
-exports.classify = function (identifier) {
-  let response = getRequest(identifier, ENDPOINT, function (data) {
-    return data;
+exports.classify = function (identifier, callback) {
+  getRequest(identifier, ENDPOINT, function (data) {
+    callback(data);
   });
-
-  console.log("Response: ", response);
-  return response;
 }
 
 // Module Test Code
-// getRequest("0380807343", ENDPOINT, function (data) {
-  // console.log(data);
-// });
+/*
+getRequest("0380807343", ENDPOINT, function (data) {
+  let title = data.title;
+  let author = data.author;
+
+  console.log("Title:", title);
+  console.log("Author:", author);
+});
+ */
