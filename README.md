@@ -4,10 +4,18 @@ A node.js package for interaction with the Online Computer Library Center's
 experimental classification web service,
 [classify2](http://classify.oclc.org/classify2/).
 
-## Usage (Needs Updating)
+[![NPM version](https://badge.fury.io/js/classify2_api.png)](http://badge.fury.io/js/classify2_api)
+
+## Usage
 ```js
-var classify = require( 'classify2' )
-console.log( 'Dewey Decimal: ' + classify.get( '020161586X' ).dewey )
-console.log( 'Library of Congress: ' + classify.get( '020161586X' ).congress )
-console.log( 'Response: ' + classify.get( '020161586X' ).status )
+const classify = require('classify2_api');
+
+classify.classify("0380807343", async function (data) {
+  console.log(data.title);
+  console.log(data.author);
+  console.log(data.congress);
+  console.log(data.dewey);
+}
 ```
+
+[![NPM](https://nodei.co/npm/classify2_api.png)](https://nodei.co/npm/classify2_api/)
