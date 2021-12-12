@@ -10,7 +10,10 @@ experimental classification web service,
 ```js
 const classify = require('classify2_api');
 
-classify.classify("0380807343", async function (data) {
+// Parameters: identifier, type, callback
+// Type: "isbn" or "title-author"
+
+classify.classify("0380807343", "isbn", async function (data) {
   console.log(data.title);
   console.log(data.author);
   console.log(data.congress);
