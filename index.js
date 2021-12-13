@@ -62,7 +62,7 @@ function getRequest(identifier, endpoint, callback) {
   )
 }
 
-exports.classify = function (identifier, callback, type) {
+exports.classify = function (identifier, type, callback) {
   if (type == "isbn") {
     getRequest(identifier, isbn_ep, function (data) {
       callback(data);
