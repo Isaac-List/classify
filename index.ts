@@ -1,4 +1,5 @@
 /**
+ * @license
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
@@ -68,6 +69,11 @@ async function getRequest(identifier: string, endpoint: string, callback: callba
 exports.classify = (identifier: string, type: string, callback: callback) => {
   if (type == "isbn") {
     getRequest(identifier, isbn_ep, (data: any) => {
+      callback(data);
+    });
+  }
+  else if (type == "title-author") {
+    getRequest(identifier, title_ep, (data: any) => {
       callback(data);
     });
   }
