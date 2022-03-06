@@ -3,6 +3,7 @@ const classify = require("../index.js");
 
 describe('API Request Handler', function() {
   it("Should work with ISBN's", function(done) {
+    this.timeout(3000);
     classify.classify("isbn", ["9780380807345"], function (data) {
 	    assert.equal(data.title, "Coraline");
 	    assert.equal(data.congress, "PZ7.G1273");
@@ -11,6 +12,7 @@ describe('API Request Handler', function() {
   });
 
   it("Should return the proper error for No Info", function (done) {
+    this.timeout(3000);
     classify.classify("isbn", ["9780380807343"], function (data) {
       assert.equal(data, "No Information Found");
       done();
