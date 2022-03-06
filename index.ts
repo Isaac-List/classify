@@ -67,6 +67,17 @@ async function getRequest(request_type: string, identifier: string[], callback: 
         console.log("Encountered an Error:", e);
       }
     }
+
+    // Catch various OCLC errors
+    else {
+      let error_codes = {
+        "100": "No Input Provided",
+        "101": "Invalid Input",
+        "102": "No Information Found",
+        "200": "Unexpected Error"
+      }
+      callback(error_codes[code]);
+    }
   });
 }
 
