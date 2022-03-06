@@ -24,15 +24,19 @@ type response = {
   congress: string;
 };
 
-async function getRequest(identifier: string, endpoint: string, callback: callback) {
+async function getRequest(request_type: string, identifier: string[], callback: callback) {
   let combined_endpoint = "";
 
-  if (typeof(identifier) == "string") {
-    combined_endpoint = endpoint + identifier;
+  if (request_type == "isbn") {
+    combined_endpoint = isbn_ep + identifier[0];
   }
 
-  else if(Array.isArray(identifier)) {
-    combined_endpoint = endpoint + identifier[0] + "&author=" + identifier[1];
+  else if (request_type == "title-author") {
+    combined_endpoint = title_ep + identifier[0] + "&author=" + identifier[1];
+  }
+
+  else if (request_type == "owi") {
+    combined_endpoint = owi_ep + identifier[0];
   }
 
   const response = await node_fetch(combined_endpoint);
@@ -43,10 +47,10 @@ async function getRequest(identifier: string, endpoint: string, callback: callba
 
     if (code == 4) {
       let owi = result.classify.works[0].work[0]["$"].owi;
-      getRequest(owi, owi_ep, callback);
+      getRequest("owi", [owi], callback);
     }
     
-    else {
+    else if (code == 0) {
       result = result.classify;
 
       try {
@@ -66,38 +70,8 @@ async function getRequest(identifier: string, endpoint: string, callback: callba
   });
 }
 
-exports.classify = (identifier: string, type: string, callback: callback) => {
-  if (type == "isbn") {
-    getRequest(identifier, isbn_ep, (data: any) => {
-      callback(data);
-    });
-  }
-  else if (type == "title-author") {
-    getRequest(identifier, title_ep, (data: any) => {
-      callback(data);
-    });
-  }
+exports.classify = (request_type: string, identifier: string[], callback: callback) => {
+  getRequest(request_type, identifier, (data: any) => {
+    callback(data);
+  });
 }
-
-/**
- * Module Test Code
- */
-
-/** Title and Author */
-// getRequest(["Coraline", ""], title_ep, function (data) {
-//   let title = data.title;
-//   let author = data.author;
-
-//   console.log("Request with Title:")
-//   console.log("Title:", title);
-// });
-
-/** ISBN */
-// getRequest("0380807343", isbn_ep, function (data) {
-//   let title = data.title;
-//   let author = data.author;
-
-//   console.log("Request with ISBN:");
-//   console.log("Title:", title);
-//   console.log("Author:", author);
-// });
