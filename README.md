@@ -13,7 +13,14 @@ const classify = require('classify2_api');
 // Parameters: identifier, type, callback
 // Type: "isbn" or "title-author"
 
-classify.classify("0380807343", "isbn", async function (data) {
+classify.classify("isbn", ["9781491946008"], async function (data) {
+  console.log(data.title);
+  console.log(data.author);
+  console.log(data.congress);
+  console.log(data.dewey);
+}
+
+classify.classify("isbn", ["Fluent Python", "Luciano Ramalho"], async function (data) {
   console.log(data.title);
   console.log(data.author);
   console.log(data.congress);
