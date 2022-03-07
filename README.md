@@ -20,7 +20,7 @@ classify.classify("isbn", ["9781491946008"], async function (data) {
   console.log(data.dewey);
 }
 
-classify.classify("isbn", ["Fluent Python", "Luciano Ramalho"], async function (data) {
+classify.classify("title-author", ["Fluent Python", "Luciano Ramalho"], async function (data) {
   console.log(data.title);
   console.log(data.author);
   console.log(data.congress);
