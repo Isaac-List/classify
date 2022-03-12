@@ -10,7 +10,7 @@ const xml2js = require('xml2js').parseString;
 
 
 const isbn_ep = "http://classify.oclc.org/classify2/Classify?summary=true&isbn=";
-const owi_ep = "http://classify.oclc.org/classify2/Classify?summary=true&owi=";
+const wi_ep = "http://classify.oclc.org/classify2/Classify?summary=true&wi=";
 const title_ep = "http://classify.oclc.org/classify2/Classify?summary=true&title=";
 
 type callback = (response: any) => void;
@@ -35,8 +35,8 @@ async function getRequest(request_type: string, identifier: string[], callback: 
     combined_endpoint = title_ep + identifier[0] + "&author=" + identifier[1];
   }
 
-  else if (request_type == "owi") {
-    combined_endpoint = owi_ep + identifier[0];
+  else if (request_type == "wi") {
+    combined_endpoint = wi_ep + identifier[0];
   }
 
   const response = await node_fetch(combined_endpoint);
@@ -46,8 +46,8 @@ async function getRequest(request_type: string, identifier: string[], callback: 
     let code = result.classify.response[0]["$"].code;
 
     if (code == 4) {
-      let owi = result.classify.works[0].work[0]["$"].owi;
-      getRequest("owi", [owi], callback);
+      let wi = result.classify.works[0].work[0]["$"].wi;
+      getRequest("wi", [wi], callback);
     }
     
     else if (code == 0) {
