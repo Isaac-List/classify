@@ -46,8 +46,36 @@ async function getRequest(request_type: string, identifier: string[], callback: 
     let code = result.classify.response[0]["$"].code;
 
     if (code == 4) {
-      let wi = result.classify.works[0].work[0]["$"].wi;
-      getRequest("wi", [wi], callback);
+      if (request_type == "isbn") {
+        let wi = result.classify.works[0].work[0]["$"].wi;
+        getRequest("wi", [wi], callback);
+      }
+      else if (request_type == "title-author") {
+        try {
+          let works = result.classify.works[0].work;
+          let results = [];
+
+          for (let i = 0; i < works.length; i++) {
+            let work = works[i]["$"];
+    
+            let item = {
+              author: work.author,
+              title: work.title,
+              format: work.format,
+              code: work.wi
+            }
+    
+            if (item.format == "Book") {
+              results.push(item);
+            }
+          }
+
+          callback(results);
+        }
+        catch (e) {
+          console.log("Error:", e);
+        }
+      }
     }
     
     else if (code == 0) {
