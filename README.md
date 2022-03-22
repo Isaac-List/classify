@@ -10,6 +10,7 @@ experimental classification web service,
 ```js
 const classify = require('classify2_api');
 
+// Using an ISBN -- will return a single result
 classify.classify("isbn", ["9781491946008"], async function (data) {
   console.log(data.title);
   console.log(data.author);
@@ -17,9 +18,19 @@ classify.classify("isbn", ["9781491946008"], async function (data) {
   console.log(data.dewey);
 }
 
+// Searching by title and author -- Will return a list of results
 classify.classify("title-author", ["Fluent Python", "Luciano Ramalho"], async function (data) {
-  console.log(data.[0]);
+  console.log(data[0]);
 }
+
+// Searching using OCLC's "wi" code -- will return a single result
+// Use to get information about a specific work when the module returns multiple results
+classify.classify("wi", ["49261060"], async function (data) {
+  console.log(data).title);
+  console.log(data.author);
+  console.log(data.congress);
+  console.log(data.dewey);
+})
 ```
 
 ## Response format
