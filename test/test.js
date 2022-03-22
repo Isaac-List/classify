@@ -31,6 +31,15 @@ describe('API Request Handler', function() {
     });
   });
 
+  it("Should work with a 'wi' number", function(done) {
+    this.timeout(3500);
+    classify.classify("wi", ["49261060"], function (data) {
+      assert.equal(data.title, "Coraline");
+      assert.equal(data.congress, "PZ7.G1273");
+    });
+    done();
+  });
+
   it("Should return the proper error for No Info", function (done) {
     this.timeout(3500);
     classify.classify("isbn", ["9780380807343"], function (data) {
