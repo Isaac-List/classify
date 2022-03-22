@@ -10,9 +10,6 @@ experimental classification web service,
 ```js
 const classify = require('classify2_api');
 
-// Parameters: identifier, type, callback
-// Type: "isbn" or "title-author"
-
 classify.classify("isbn", ["9781491946008"], async function (data) {
   console.log(data.title);
   console.log(data.author);
@@ -21,11 +18,45 @@ classify.classify("isbn", ["9781491946008"], async function (data) {
 }
 
 classify.classify("title-author", ["Fluent Python", "Luciano Ramalho"], async function (data) {
-  console.log(data.title);
-  console.log(data.author);
-  console.log(data.congress);
-  console.log(data.dewey);
+  console.log(data.[0]);
 }
+```
+
+## Response format
+
+### ISBN
+
+Given an ISBN number, the Classify module will attempt to return a single item response.
+
+This response will be in the format:
+```js
+response = {
+  status: OCLC Status Code,
+  owi: OCLC "owi" identifier number,
+  author: Author(s) of the work,
+  title: Title of the work,
+  dewey: Dewey Decimal number most commonly used,
+  congress: Library of Congress Classification number most commonly used
+}
+```
+
+### Title and/or Author
+
+Given an list containing a title and/or an author, the Classify module will likely
+return a muilt-result response. This response will include any works with the "Book"
+format which match the search parameter(s) given.
+
+This response will be in the format:
+```js
+response = [
+  {
+    author: Author(s) of the work,
+    title: Title of the work,
+    format: Format of the work (always "Book"),
+    code: OCLC "wi" code of the work
+  }
+  ... other works in the same format
+]
 ```
 
 [![NPM](https://nodei.co/npm/classify2_api.png)](https://nodei.co/npm/classify2_api/)
