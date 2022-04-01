@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "mocha --exit"
+    "test": "nyc mocha --exit"
   },
   "dependencies": {
     "isbn": "^0.4.0",
@@ -20,6 +20,7 @@
     "@types/xml2js": "^0.4.9",
     "eslint": "^8.5.0",
     "mocha": "^9.2.1",
+    "nyc": "^15.1.0",
     "should": "~1.3.0",
     "typescript": "^4.5.4"
   },

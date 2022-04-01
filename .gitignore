@@ -7,3 +7,4 @@ npm-debug.log
 index.d.ts
 index.d.ts.map
 index.js
+.nyc_output
