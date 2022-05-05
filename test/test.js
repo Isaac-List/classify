@@ -14,8 +14,8 @@ describe('API Request Handler', function() {
   it("Should work with Title", function(done) {
     this.timeout(5000);
     classify.classify("title-author", ["Paper towns", ""], function(data) {
-      assert.equal(data[0].code, '202483793');
-      assert.equal(data[4].code, '15560054');
+      assert.equal(data[0].code, '125916898');
+      assert.equal(data[4].code, '2286628550');
       assert.equal(data[1].format, "Book");
       done();
     });
@@ -25,7 +25,7 @@ describe('API Request Handler', function() {
     this.timeout(3500);
     classify.classify("title-author", ["Coraline", "Neil Gaiman"], function (data) {
       assert.equal(data[0].title, 'Coraline');
-      assert.equal(data[4].code, '862301469');
+      assert.equal(data[4].code, '3859968166');
       assert.equal(data[1].format, "Book");
       done();
     });

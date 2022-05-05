@@ -81,14 +81,31 @@ async function getRequest(request_type: string, identifier: string[], callback: 
     else if (code == 0) {
       result = result.classify;
 
+      let ddc: string = "";
+      let lcc: string = "";
+
+      try {
+        ddc = result.recommendations[0].ddc[0].mostPopular[0]['$'].sfa;
+      }
+      catch (e) {
+        console.log("Encountered an Error:", e);
+      }
+
+      try {
+        lcc = result.recommendations[0].lcc[0].mostPopular[0]['$'].sfa;
+      }
+      catch (e) {
+        console.log("Encountered an Error:", e);
+      }
+
       try {
         let response = {
           status: result.response[0]['$'].code,
           owi: result.work[0]["$"].owi,
           author: result.work[0]["$"].author,
           title: result.work[0]["$"].title,
-          dewey: result.recommendations[0].ddc[0].mostPopular[0]['$'].sfa,
-          congress: result.recommendations[0].lcc[0].mostPopular[0]['$'].sfa
+          dewey: ddc,
+          congress: lcc
         }
         callback(response)
       } catch (e) {
