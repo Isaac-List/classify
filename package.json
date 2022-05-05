@@ -1,6 +1,6 @@
 {
   "name": "classify2_api",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Use OCLC's Classify2 API",
   "engines": {
     "node": ">=14.x"
